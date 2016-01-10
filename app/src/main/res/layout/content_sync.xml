@@ -7,8 +7,8 @@
 
     <com.wang.avi.AVLoadingIndicatorView
         android:id="@+id/indicator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/indicator_size"
+        android:layout_height="@dimen/indicator_size"
         android:layout_centerInParent="true"
         app:indicator="BallGridPulse"
         />
