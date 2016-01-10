@@ -23,6 +23,7 @@
         </activity>
 
         <activity android:name=".intro.KontaksIntro" />
+        <activity android:name=".home.HomeActivity" />
     </application>
 
 </manifest>

@@ -1,10 +1,12 @@
 package com.lawgimenez.kontaks.intro;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.github.paolorotolo.appintro.AppIntro;
 import com.lawgimenez.kontaks.R;
+import com.lawgimenez.kontaks.home.HomeActivity;
 
 /**
  * Created by lawrencegimenez on 1/10/16.
@@ -38,6 +40,9 @@ public class KontaksIntro extends AppIntro {
     @Override
     public void onDonePressed() {
         Log.d(TAG, "onDonePressed()");
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override
