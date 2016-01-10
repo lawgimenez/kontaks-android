@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.github.paolorotolo.appintro.AppIntro;
+import com.lawgimenez.kontaks.R;
 
 /**
  * Created by lawrencegimenez on 1/10/16.
@@ -16,7 +17,12 @@ public class KontaksIntro extends AppIntro {
     public void init(Bundle savedInstanceState) {
         addSlide(IntroPageFragment.getInstance("Page 1"));
         addSlide(IntroPageFragment.getInstance("Page 2"));
-        addSlide(SyncContactsFragment.getInstance());
+        addSlide(IntroPageFragment.getInstance("Page 3"));
+//        addSlide(SyncContactsFragment.getInstance());
+
+        setTheme(R.style.AppTheme_NoActionBar);
+
+        showSkipButton(false);
     }
 
     @Override
