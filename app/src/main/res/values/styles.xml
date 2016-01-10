@@ -22,6 +22,9 @@
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:layout_centerInParent">true</item>
+        <item name="android:paddingLeft">@dimen/label_padding_left_right</item>
+        <item name="android:paddingRight">@dimen/label_padding_left_right</item>
+        <item name="android:layout_marginTop">8dp</item>
     </style>
 
     <style name="Button">
