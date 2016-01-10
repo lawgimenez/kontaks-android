@@ -89,7 +89,7 @@ public class Contacts {
         return mDisplayName;
     }
 
-    public int hasPhoneNumber() {
+    public int getHasPhoneNumber() {
         return mHasPhoneNumber;
     }
 
@@ -117,7 +117,7 @@ public class Contacts {
         return mLastTimeContacted;
     }
 
-    public int isFavorited() {
+    public int getIsFavorited() {
         return mFavorited;
     }
 

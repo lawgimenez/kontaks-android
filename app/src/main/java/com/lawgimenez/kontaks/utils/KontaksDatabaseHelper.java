@@ -1,8 +1,11 @@
 package com.lawgimenez.kontaks.utils;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.lawgimenez.kontaks.models.Contacts;
 
 /**
  * Created by lawrencegimenez on 1/10/16.
@@ -53,6 +56,23 @@ public class KontaksDatabaseHelper extends SQLiteOpenHelper {
         database.execSQL("DROP TABLE IF EXISTS " + TABLE_CONTACTS);
 
         onCreate(database);
+    }
+
+    public void addContacts(Contacts contacts) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+        cv.put(COL_FULLNAME, contacts.getDisplayName());
+        cv.put(COL_HAS_PHONE_NUMBER, contacts.getHasPhoneNumber());
+        cv.put(COL_PHOTO_ID, contacts.getPhotoId());
+        cv.put(COL_PHOTO_URI, contacts.getPhotoUri());
+        cv.put(COL_PHOTO_THUMBNAIL_URI, contacts.getPhotoThumbnailUri());
+        cv.put(COL_TIMES_CONTACTED, contacts.getTimesContacted());
+        cv.put(COL_LAST_TIME_CONTACTED, contacts.getLastTimeContacted());
+        cv.put(COL_FAVORITED, contacts.getIsFavorited());
+
+        db.insert(TABLE_CONTACTS, null, cv);
+        db.close();
     }
 
 }
