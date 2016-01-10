@@ -18,6 +18,7 @@ public class KontaksDatabaseHelper extends SQLiteOpenHelper {
 
     // Table name for contacts
     private static final String TABLE_CONTACTS = "contacts";
+    private static final String TABLE_GROUPS = "groups";
 
     // Column names for contacts
     private static final String COL_ID = "id";
@@ -29,6 +30,10 @@ public class KontaksDatabaseHelper extends SQLiteOpenHelper {
     private static final String COL_TIMES_CONTACTED = "times_contacted";
     private static final String COL_LAST_TIME_CONTACTED = "last_time_contacted";
     private static final String COL_FAVORITED = "favorited";
+
+    // Column names for groups
+    private static final String COL_GROUP_NAME = "group_name";
+    private static final String COL_GROUP_FOREIGN_KEY = "group_contacts_id";
 
     // SQL statement for creating contacts table
     private static final String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_CONTACTS + "("
@@ -42,6 +47,13 @@ public class KontaksDatabaseHelper extends SQLiteOpenHelper {
             + COL_LAST_TIME_CONTACTED + " TEXT, "
             + COL_FAVORITED + " INTEGER)";
 
+    // SQL statement for creating groups table
+    private static final String CREATE_GROUPS_TABLE = "CREATE TABLE " + TABLE_GROUPS + "("
+            + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + COL_GROUP_FOREIGN_KEY + " INTEGER, "
+            + COL_GROUP_NAME + " TEXT)";
+
+
     public KontaksDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, VERSION);
     }
@@ -49,11 +61,13 @@ public class KontaksDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase database) {
         database.execSQL(CREATE_CONTACTS_TABLE);
+        database.execSQL(CREATE_GROUPS_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion) {
         database.execSQL("DROP TABLE IF EXISTS " + TABLE_CONTACTS);
+        database.execSQL("DROP TABLE IF EXISTS " + TABLE_GROUPS);
 
         onCreate(database);
     }
