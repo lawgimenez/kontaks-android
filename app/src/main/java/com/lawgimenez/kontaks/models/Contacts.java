@@ -33,47 +33,47 @@ public class Contacts {
 
     private ArrayList<Integer> mListAccounts;
 
-    public void setDeviceId (long deviceId) {
+    public void setDeviceId(long deviceId) {
         mDeviceId = deviceId;
     }
 
-    public void setDisplayName (String displayName) {
+    public void setDisplayName(String displayName) {
         mDisplayName = displayName;
     }
 
-    public void setHasPhoneNumber (int hasPhoneNumber) {
+    public void setHasPhoneNumber(int hasPhoneNumber) {
         mHasPhoneNumber = hasPhoneNumber;
     }
 
-    public void setPhoneNumbers (ArrayList<String> listPhoneNumbers) {
+    public void setPhoneNumbers(ArrayList<String> listPhoneNumbers) {
         mListPhoneNumbers = listPhoneNumbers;
     }
 
-    public void setPhotoId (long photoId) {
+    public void setPhotoId(long photoId) {
         mPhotoId = photoId;
     }
 
-    public void setPhotoUri (long photoUri) {
+    public void setPhotoUri(long photoUri) {
         mPhotoUri = photoUri;
     }
 
-    public void setPhotoThumbnailUri (long photoThumbnailUri) {
+    public void setPhotoThumbnailUri(long photoThumbnailUri) {
         mPhotoThumbnailUri = photoThumbnailUri;
     }
 
-    public void setTimesContacted (int timesContacted) {
+    public void setTimesContacted(int timesContacted) {
         mTimesContacted = timesContacted;
     }
 
-    public void setLastTimeContacted (long lastTimeContacted) {
+    public void setLastTimeContacted(long lastTimeContacted) {
         mLastTimeContacted = lastTimeContacted;
     }
 
-    public void setIsFavorited (int favorited) {
+    public void setIsFavorited(int favorited) {
         mFavorited = favorited;
     }
 
-    public void setAccounts (ArrayList<Integer> listAccounts) {
+    public void setAccounts(ArrayList<Integer> listAccounts) {
         mListAccounts = listAccounts;
     }
 
@@ -81,47 +81,47 @@ public class Contacts {
      * Getters
      */
 
-    public long getDeviceId () {
+    public long getDeviceId() {
         return mDeviceId;
     }
 
-    public String getDisplayName () {
+    public String getDisplayName() {
         return mDisplayName;
     }
 
-    public int hasPhoneNumber () {
+    public int hasPhoneNumber() {
         return mHasPhoneNumber;
     }
 
-    public ArrayList<String> getPhoneNumbers () {
+    public ArrayList<String> getPhoneNumbers() {
         return mListPhoneNumbers;
     }
 
-    public long getPhotoId () {
+    public long getPhotoId() {
         return mPhotoId;
     }
 
-    public long getPhotoUri () {
+    public long getPhotoUri() {
         return mPhotoUri;
     }
 
-    public long getPhotoThumbnailUri () {
+    public long getPhotoThumbnailUri() {
         return mPhotoThumbnailUri;
     }
 
-    public int getTimesContacted () {
+    public int getTimesContacted() {
         return mTimesContacted;
     }
 
-    public long getLastTimeContacted () {
+    public long getLastTimeContacted() {
         return mLastTimeContacted;
     }
 
-    public int isFavorited () {
+    public int isFavorited() {
         return mFavorited;
     }
 
-    public ArrayList<Integer> getAccounts () {
+    public ArrayList<Integer> getAccounts() {
         return mListAccounts;
     }
 }
