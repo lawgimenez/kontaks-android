@@ -7,6 +7,10 @@ import java.util.ArrayList;
  */
 public class Contacts {
 
+    private static final int FACEBOOK = 1;
+    private static final int TWITTER = 2;
+    private static final int GOOGLE = 3;
+
     private long mDeviceId;
 
     private String mDisplayName;
