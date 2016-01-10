@@ -14,7 +14,6 @@ public class KontaksIntro extends AppIntro {
 
     @Override
     public void init(Bundle savedInstanceState) {
-
     }
 
     @Override

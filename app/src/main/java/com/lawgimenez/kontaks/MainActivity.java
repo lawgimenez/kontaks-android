@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
             // the tutorial/intro page.
             Intent intent = new Intent(this, KontaksIntro.class);
             startActivity(intent);
+            finish();
         }
     }
 
