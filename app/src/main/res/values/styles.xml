@@ -17,4 +17,14 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="Label">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="LabelIntroDesc" parent="Label">
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_centerInParent">true</item>
+    </style>
+
 </resources>

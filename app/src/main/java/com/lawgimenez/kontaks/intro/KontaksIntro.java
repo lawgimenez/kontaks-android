@@ -14,6 +14,8 @@ public class KontaksIntro extends AppIntro {
 
     @Override
     public void init(Bundle savedInstanceState) {
+        addSlide(IntroPageFragment.getInstance("Page 1"));
+        addSlide(IntroPageFragment.getInstance("Page 2"));
         addSlide(SyncContactsFragment.getInstance());
     }
 

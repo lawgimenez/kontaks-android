@@ -22,7 +22,7 @@ public class SyncContactsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        retrievePhoneContacts();
+        //retrievePhoneContacts();
     }
 
     private void retrievePhoneContacts() {
