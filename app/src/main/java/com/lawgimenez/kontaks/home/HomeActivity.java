@@ -10,9 +10,12 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.FrameLayout;
 
+import com.lawgimenez.kontaks.KontaksApplication;
 import com.lawgimenez.kontaks.R;
+import com.lawgimenez.kontaks.models.Contacts;
 import com.lawgimenez.kontaks.pages.FragmentAddGroup;
 import com.lawgimenez.kontaks.pages.FragmentContactsSync;
+import com.lawgimenez.kontaks.utils.KontaksDatabaseHelper;
 
 /**
  * Created by lawrencegimenez on 1/10/16.
@@ -23,10 +26,16 @@ public class HomeActivity extends AppCompatActivity {
     private FrameLayout mContainerHome;
     private Toolbar mToolbar;
 
+    private KontaksApplication mApplication;
+    private KontaksDatabaseHelper mDatabase;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        mApplication = KontaksApplication.getInstance();
+        mDatabase = mApplication.getDatabase();
 
         RetrieveContactsTask retrieveContactsTask = new RetrieveContactsTask();
         retrieveContactsTask.execute();
@@ -35,8 +44,14 @@ public class HomeActivity extends AppCompatActivity {
 
         setSupportActionBar(mToolbar);
 
-        FragmentContactsSync fragmentContactsSync = FragmentContactsSync.newInstance();
-        getSupportFragmentManager().beginTransaction().add(R.id.container_home, fragmentContactsSync).commit();
+        Log.i(TAG, "Contacts count: " + mDatabase.getContactsCount());
+        if(mDatabase.getContactsCount() > 0) {
+            FragmentAddGroup fragmentAddGroup = FragmentAddGroup.newInstance();
+            getSupportFragmentManager().beginTransaction().add(R.id.container_home, fragmentAddGroup).commit();
+        } else {
+            FragmentContactsSync fragmentContactsSync = FragmentContactsSync.newInstance();
+            getSupportFragmentManager().beginTransaction().add(R.id.container_home, fragmentContactsSync).commit();
+        }
     }
 
     private void initViews() {
@@ -66,6 +81,12 @@ public class HomeActivity extends AppCompatActivity {
                             cursorPhoneNum.close();
                         }
                     }
+
+                    Contacts contacts = new Contacts();
+                    contacts.setDeviceId(Long.parseLong(id));
+                    contacts.setDisplayName(name);
+
+                    mDatabase.addContacts(contacts);
 
                     Log.i(TAG, "Name: " + name);
 

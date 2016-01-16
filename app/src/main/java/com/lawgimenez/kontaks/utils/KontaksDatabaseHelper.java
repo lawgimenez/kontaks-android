@@ -2,6 +2,7 @@ package com.lawgimenez.kontaks.utils;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -87,6 +88,13 @@ public class KontaksDatabaseHelper extends SQLiteOpenHelper {
 
         db.insert(TABLE_CONTACTS, null, cv);
         db.close();
+    }
+
+    public int getContactsCount() {
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_CONTACTS, null, null, null, null, null, null);
+        return cursor.getCount();
     }
 
 }
