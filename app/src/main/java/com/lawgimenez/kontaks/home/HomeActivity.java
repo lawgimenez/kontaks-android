@@ -37,9 +37,6 @@ public class HomeActivity extends AppCompatActivity {
         mApplication = KontaksApplication.getInstance();
         mDatabase = mApplication.getDatabase();
 
-        RetrieveContactsTask retrieveContactsTask = new RetrieveContactsTask();
-        retrieveContactsTask.execute();
-
         initViews();
 
         setSupportActionBar(mToolbar);
@@ -49,6 +46,9 @@ public class HomeActivity extends AppCompatActivity {
             FragmentAddGroup fragmentAddGroup = FragmentAddGroup.newInstance();
             getSupportFragmentManager().beginTransaction().add(R.id.container_home, fragmentAddGroup).commit();
         } else {
+            RetrieveContactsTask retrieveContactsTask = new RetrieveContactsTask();
+            retrieveContactsTask.execute();
+
             FragmentContactsSync fragmentContactsSync = FragmentContactsSync.newInstance();
             getSupportFragmentManager().beginTransaction().add(R.id.container_home, fragmentContactsSync).commit();
         }
