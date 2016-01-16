@@ -35,6 +35,7 @@ public class KontaksDatabaseHelper extends SQLiteOpenHelper {
 
     // Column names for groups
     private static final String COL_GROUP_NAME = "group_name";
+    private static final String COL_GROUP_DESC = "group_desc";
     private static final String COL_GROUP_FOREIGN_KEY = "group_contacts_id";
 
     // SQL statement for creating contacts table
@@ -53,7 +54,8 @@ public class KontaksDatabaseHelper extends SQLiteOpenHelper {
     private static final String CREATE_GROUPS_TABLE = "CREATE TABLE " + TABLE_GROUPS + "("
             + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COL_GROUP_FOREIGN_KEY + " INTEGER, "
-            + COL_GROUP_NAME + " TEXT)";
+            + COL_GROUP_NAME + " TEXT, "
+            + COL_GROUP_DESC + " TEXT)";
 
 
     public KontaksDatabaseHelper(Context context) {
@@ -91,14 +93,28 @@ public class KontaksDatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void addGroup(Group groups) {
+    public void addGroup(Group group) {
+        SQLiteDatabase db = getWritableDatabase();
 
+        ContentValues cv = new ContentValues();
+        cv.put(COL_GROUP_NAME, group.getGroupName());
+        cv.put(COL_GROUP_DESC, group.getGroupDescription());
+
+        db.insert(TABLE_GROUPS, null, cv);
+        db.close();
     }
 
     public int getContactsCount() {
         SQLiteDatabase db = getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_CONTACTS, null, null, null, null, null, null);
+        return cursor.getCount();
+    }
+
+    public int getGroupsCount() {
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_GROUPS, null, null, null, null, null, null);
         return cursor.getCount();
     }
 
