@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.lawgimenez.kontaks.home.HomeActivity;
 import com.lawgimenez.kontaks.intro.KontaksIntro;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,13 +19,16 @@ public class MainActivity extends AppCompatActivity {
 
         mApplication = KontaksApplication.getInstance();
 
+        Intent intent;
         if (!mApplication.isGettingStarted()) {
             // It means user has just installed the app, so we will still display
             // the tutorial/intro page.
-            Intent intent = new Intent(this, KontaksIntro.class);
-            startActivity(intent);
-            finish();
+            intent = new Intent(this, KontaksIntro.class);
+        } else {
+            intent = new Intent(this, HomeActivity.class);
         }
+        startActivity(intent);
+        finish();
     }
 
     @Override

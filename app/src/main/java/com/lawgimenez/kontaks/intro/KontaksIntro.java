@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.github.paolorotolo.appintro.AppIntro;
+import com.lawgimenez.kontaks.KontaksApplication;
 import com.lawgimenez.kontaks.R;
 import com.lawgimenez.kontaks.home.HomeActivity;
 
@@ -43,6 +44,9 @@ public class KontaksIntro extends AppIntro {
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
         finish();
+
+        KontaksApplication application = KontaksApplication.getInstance();
+        application.setGettingStarted(true);
     }
 
     @Override

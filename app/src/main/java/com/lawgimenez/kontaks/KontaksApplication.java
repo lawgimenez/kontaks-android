@@ -48,6 +48,10 @@ public class KontaksApplication extends Application {
         return mSharedSettings.getBoolean(KEY_GETTING_STARTED, false);
     }
 
+    public void setGettingStarted(boolean isGettingStarted) {
+        mSharedSettings.edit().putBoolean(KEY_GETTING_STARTED, isGettingStarted).apply();
+    }
+
     public KontaksDatabaseHelper getDatabase() {
         return mDbHelper;
     }
