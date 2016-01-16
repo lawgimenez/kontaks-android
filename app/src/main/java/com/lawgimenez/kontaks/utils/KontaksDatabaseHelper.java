@@ -6,7 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.lawgimenez.kontaks.models.Contacts;
+import com.lawgimenez.kontaks.models.Contact;
+import com.lawgimenez.kontaks.models.Group;
 
 /**
  * Created by lawrencegimenez on 1/10/16.
@@ -73,7 +74,7 @@ public class KontaksDatabaseHelper extends SQLiteOpenHelper {
         onCreate(database);
     }
 
-    public void addContacts(Contacts contacts) {
+    public void addContacts(Contact contacts) {
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues cv = new ContentValues();
@@ -88,6 +89,10 @@ public class KontaksDatabaseHelper extends SQLiteOpenHelper {
 
         db.insert(TABLE_CONTACTS, null, cv);
         db.close();
+    }
+
+    public void addGroup(Group groups) {
+
     }
 
     public int getContactsCount() {

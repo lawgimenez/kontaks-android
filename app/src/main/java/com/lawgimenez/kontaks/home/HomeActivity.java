@@ -12,7 +12,7 @@ import android.widget.FrameLayout;
 
 import com.lawgimenez.kontaks.KontaksApplication;
 import com.lawgimenez.kontaks.R;
-import com.lawgimenez.kontaks.models.Contacts;
+import com.lawgimenez.kontaks.models.Contact;
 import com.lawgimenez.kontaks.pages.FragmentAddGroup;
 import com.lawgimenez.kontaks.pages.FragmentContactsSync;
 import com.lawgimenez.kontaks.utils.KontaksDatabaseHelper;
@@ -44,7 +44,7 @@ public class HomeActivity extends AppCompatActivity {
 
         setSupportActionBar(mToolbar);
 
-        Log.i(TAG, "Contacts count: " + mDatabase.getContactsCount());
+        Log.i(TAG, "Contact count: " + mDatabase.getContactsCount());
         if(mDatabase.getContactsCount() > 0) {
             FragmentAddGroup fragmentAddGroup = FragmentAddGroup.newInstance();
             getSupportFragmentManager().beginTransaction().add(R.id.container_home, fragmentAddGroup).commit();
@@ -82,7 +82,7 @@ public class HomeActivity extends AppCompatActivity {
                         }
                     }
 
-                    Contacts contacts = new Contacts();
+                    Contact contacts = new Contact();
                     contacts.setDeviceId(Long.parseLong(id));
                     contacts.setDisplayName(name);
 

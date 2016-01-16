@@ -3,7 +3,7 @@ package com.lawgimenez.kontaks.models;
 /**
  * Created by lawrencegimenez on 1/16/16.
  */
-public class Groups {
+public class Group {
 
     private long mGroupId;
 

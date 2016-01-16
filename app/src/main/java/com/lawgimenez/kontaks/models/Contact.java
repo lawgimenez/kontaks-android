@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by lawrencegimenez on 1/10/16.
  */
-public class Contacts {
+public class Contact {
 
     private static final int FACEBOOK = 1;
     private static final int TWITTER = 2;
