@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Kontaks</string>
     <string name="action_settings">Settings</string>
+    <string name="action_save">Save</string>
 
     <string name="intro_desc_page_1">This is page 1</string>
     <string name="syncing_contacts">Hi! I am syncing your contacts. This won\'t take long. I guess&#8230;</string>
