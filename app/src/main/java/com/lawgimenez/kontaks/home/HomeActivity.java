@@ -28,8 +28,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        //retrievePhoneContacts();
-
         RetrieveContactsTask retrieveContactsTask = new RetrieveContactsTask();
         retrieveContactsTask.execute();
 
