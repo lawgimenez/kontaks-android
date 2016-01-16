@@ -2,6 +2,7 @@ package com.lawgimenez.kontaks.home;
 
 import android.content.ContentResolver;
 import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.widget.FrameLayout;
 
 import com.lawgimenez.kontaks.R;
+import com.lawgimenez.kontaks.pages.FragmentAddGroup;
 import com.lawgimenez.kontaks.pages.FragmentContactsSync;
 
 /**
@@ -26,7 +28,10 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        retrievePhoneContacts();
+        //retrievePhoneContacts();
+
+        RetrieveContactsTask retrieveContactsTask = new RetrieveContactsTask();
+        retrieveContactsTask.execute();
 
         initViews();
 
@@ -69,6 +74,25 @@ public class HomeActivity extends AppCompatActivity {
                 } // end of while loop
             }
             cursor.close();
+        }
+    }
+
+    private class RetrieveContactsTask extends AsyncTask<Void, Void, Integer> {
+
+        @Override
+        protected Integer doInBackground(Void... voids) {
+
+            retrievePhoneContacts();
+
+            return 1;
+        }
+
+        @Override
+        protected void onPostExecute(Integer result) {
+            Log.i(TAG, "Done retrieving contacts list");
+
+            FragmentAddGroup fragmentAddGroup = FragmentAddGroup.newInstance();
+            getSupportFragmentManager().beginTransaction().replace(R.id.container_home, fragmentAddGroup).commit();
         }
     }
 }
