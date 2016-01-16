@@ -14,7 +14,7 @@
 
     <EditText
         android:id="@+id/edittext_add_group"
-        android:text="@string/example_group_name"
+        android:hint="@string/example_group_name"
         android:inputType="text"
         android:layout_below="@+id/textview_add_group_name"
         style="@style/BaseEditTextTheme"
@@ -29,7 +29,7 @@
 
     <EditText
         android:id="@+id/edittext_add_desc"
-        android:text="@string/example_group_desc"
+        android:hint="@string/example_group_desc"
         android:inputType="text"
         android:layout_below="@+id/textview_add_group_desc"
         style="@style/BaseEditTextTheme"
