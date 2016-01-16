@@ -5,6 +5,7 @@
     android:background="@color/colorPrimaryDark">
 
     <include
+        android:id="@+id/container_content_sync"
         layout="@layout/content_sync"
         />
 
