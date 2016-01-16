@@ -4,4 +4,9 @@
 
     <string name="intro_desc_page_1">This is page 1</string>
     <string name="syncing_contacts">Hi! I am syncing your contacts. This won\'t take long. I guess&#8230;</string>
+
+    <string name="add_group_name">Group Name</string>
+    <string name="example_group_name">e.g., Partners in crime</string>
+    <string name="add_group_desc">Add Group Description</string>
+    <string name="example_group_desc">e.g., People that would do anything for me. I hope.</string>
 </resources>
