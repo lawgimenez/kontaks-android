@@ -9,4 +9,6 @@
     <string name="example_group_name">e.g., Partners in crime</string>
     <string name="add_group_desc">Add Group Description</string>
     <string name="example_group_desc">e.g., People that would do anything for me. I hope.</string>
+
+    <string name="add_group">Add Group</string>
 </resources>

@@ -93,6 +93,8 @@ public class HomeActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction()
                     .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_right)
                     .replace(R.id.container_home, fragmentAddGroup).commit();
+
+            mToolbar.setTitle(getString(R.string.add_group));
         }
     }
 }
