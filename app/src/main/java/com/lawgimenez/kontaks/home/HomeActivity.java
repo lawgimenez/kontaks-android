@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -135,6 +136,8 @@ public class HomeActivity extends AppCompatActivity {
                         .addToBackStack(null)
                         .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_right)
                         .replace(R.id.container_home, mFragmentSelectContacts).commit();
+
+                mMenuItemSave.setTitle(getString(R.string.action_save));
             } else {
                 // If you are here, you came from the select contacts page.
                 //
@@ -144,6 +147,7 @@ public class HomeActivity extends AppCompatActivity {
 
                 mDatabase.addGroup(group);
                 Log.i(TAG, "Add Group page is not currently displayed.");
+                getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             }
 
             return true;
