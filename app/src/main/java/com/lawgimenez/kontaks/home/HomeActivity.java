@@ -18,6 +18,7 @@ import com.lawgimenez.kontaks.models.Contact;
 import com.lawgimenez.kontaks.models.Group;
 import com.lawgimenez.kontaks.pages.FragmentAddGroup;
 import com.lawgimenez.kontaks.pages.FragmentContactsSync;
+import com.lawgimenez.kontaks.pages.FragmentSelectContacts;
 import com.lawgimenez.kontaks.utils.KontaksDatabaseHelper;
 
 /**
@@ -33,6 +34,14 @@ public class HomeActivity extends AppCompatActivity {
     private KontaksDatabaseHelper mDatabase;
 
     private FragmentAddGroup mFragmentAddGroup;
+    private FragmentSelectContacts mFragmentSelectContacts;
+
+    private boolean mIsInAddGroupPage = false;
+
+    private MenuItem mMenuItem;
+
+    private String mGroupName;
+    private String mGroupDesc;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,8 +59,9 @@ public class HomeActivity extends AppCompatActivity {
 
         Log.i(TAG, "Contact count: " + mDatabase.getContactsCount());
         if(mDatabase.getContactsCount() > 0) {
+            mIsInAddGroupPage = true;
+
             mFragmentAddGroup = FragmentAddGroup.newInstance();
-            mFragmentAddGroup.setContactsList(mDatabase.getAllContacts());
 
             getSupportFragmentManager().beginTransaction().add(R.id.container_home, mFragmentAddGroup).commit();
         } else {
@@ -77,17 +87,32 @@ public class HomeActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        mMenuItem = item;
+
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_save) {
             Log.i(TAG, "Save Group");
 
-            if (mFragmentAddGroup != null) {
+            if (mIsInAddGroupPage) {
+                // It means we are in the add group page and after we should proceed to select
+                // contacts page
+                mGroupName = mFragmentAddGroup.getGroupName();
+                mGroupDesc = mFragmentAddGroup.getGroupDescription();
+
+                mFragmentSelectContacts = FragmentSelectContacts.newInstance();
+                mFragmentSelectContacts.setContactsList(mDatabase.getAllContacts());
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_right)
+                        .replace(R.id.container_home, mFragmentSelectContacts).commit();
+            } else {
+                // If you are here, you came from the select contacts page.
+                //
                 Group group = new Group();
-                group.setGroupName(mFragmentAddGroup.getGroupName());
-                group.setGroupDescription(mFragmentAddGroup.getGroupDescription());
+                group.setGroupName(mGroupName);
+                group.setGroupDescription(mGroupDesc);
 
                 mDatabase.addGroup(group);
-            } else {
                 Log.i(TAG, "Add Group page is not currently displayed.");
             }
 
@@ -185,9 +210,11 @@ public class HomeActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Integer result) {
             Log.i(TAG, "Done retrieving contacts list");
+            mIsInAddGroupPage = true;
+
+            mMenuItem.setTitle(getString(R.string.next));
 
             mFragmentAddGroup = FragmentAddGroup.newInstance();
-            mFragmentAddGroup.setContactsList(mDatabase.getAllContacts());
             getSupportFragmentManager().beginTransaction()
                     .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_right)
                     .replace(R.id.container_home, mFragmentAddGroup).commit();
