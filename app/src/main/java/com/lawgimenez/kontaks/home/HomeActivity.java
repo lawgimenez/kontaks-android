@@ -110,7 +110,11 @@ public class HomeActivity extends AppCompatActivity {
                 while (cursor.moveToNext()) {
                     String id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
                     String name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+                    long photoId = cursor.getLong(cursor.getColumnIndex(ContactsContract.Contacts.PHOTO_ID));
+                    long photoThumbnail = cursor.getLong(cursor.getColumnIndex(ContactsContract.Contacts.PHOTO_THUMBNAIL_URI));
+                    int isFavorited = cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts.STARRED));
 
+                    // Retrieve contact's phone numbers if there is one
                     String hasPhoneNum = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
                     if (Integer.parseInt(hasPhoneNum) > 0) {
                         // Cursor for getting phone number
@@ -128,6 +132,9 @@ public class HomeActivity extends AppCompatActivity {
                     Contact contacts = new Contact();
                     contacts.setDeviceId(Long.parseLong(id));
                     contacts.setDisplayName(name);
+                    contacts.setPhotoId(photoId);
+                    contacts.setPhotoThumbnailUri(photoThumbnail);
+                    contacts.setIsFavorited(isFavorited);
 
                     mDatabase.addContacts(contacts);
 
