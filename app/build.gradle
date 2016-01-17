@@ -31,4 +31,5 @@ dependencies {
         transitive = true
     }
     compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
+    compile 'com.yqritc:recyclerview-flexibledivider:1.2.6'
 }

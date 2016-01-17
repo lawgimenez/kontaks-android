@@ -1,5 +1,6 @@
 package com.lawgimenez.kontaks.pages;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import com.lawgimenez.kontaks.R;
 import com.lawgimenez.kontaks.adapters.ContactsAdapter;
 import com.lawgimenez.kontaks.listeners.OnContactsSelectedListener;
 import com.lawgimenez.kontaks.models.Contact;
+import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import java.util.ArrayList;
 
@@ -42,6 +44,7 @@ public class FragmentSelectContacts extends Fragment implements DragSelectRecycl
         // Initialize data
         mRecyclerViewList = (DragSelectRecyclerView) view.findViewById(R.id.recycler_contacts);
         mRecyclerViewList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerViewList.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).color(Color.GRAY).build());
 //        mRecyclerViewList.setLayoutManager(new GridLayoutManager(getActivity(), 4));
 
         mAdapter = new ContactsAdapter(this, mListContacts);
