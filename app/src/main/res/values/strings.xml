@@ -13,4 +13,6 @@
     <string name="example_group_desc">e.g., People that would do anything for me. I hope.</string>
 
     <string name="add_group">Add Group</string>
+    <string name="empty_group_prompt">Hi! You can create a group to organize your contacts more easily.</string>
+    <string name="create_group">Create Group</string>
 </resources>

@@ -18,6 +18,7 @@ import com.lawgimenez.kontaks.models.Contact;
 import com.lawgimenez.kontaks.models.Group;
 import com.lawgimenez.kontaks.pages.FragmentAddGroup;
 import com.lawgimenez.kontaks.pages.FragmentContactsSync;
+import com.lawgimenez.kontaks.pages.FragmentEmptyGroup;
 import com.lawgimenez.kontaks.pages.FragmentSelectContacts;
 import com.lawgimenez.kontaks.utils.KontaksDatabaseHelper;
 
@@ -56,21 +57,31 @@ public class HomeActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
 
         Log.i(TAG, "Group count: " + mDatabase.getGroupsCount());
-
-        Log.i(TAG, "Contact count: " + mDatabase.getContactsCount());
-        if(mDatabase.getContactsCount() > 0) {
-            mIsInAddGroupPage = true;
-
-            mFragmentAddGroup = FragmentAddGroup.newInstance();
-
-            getSupportFragmentManager().beginTransaction().add(R.id.container_home, mFragmentAddGroup).commit();
-        } else {
+        if (mDatabase.getContactsCount() == 0) {
             RetrieveContactsTask retrieveContactsTask = new RetrieveContactsTask();
             retrieveContactsTask.execute();
 
             FragmentContactsSync fragmentContactsSync = FragmentContactsSync.newInstance();
             getSupportFragmentManager().beginTransaction().add(R.id.container_home, fragmentContactsSync).commit();
+        } else {
+            if (mDatabase.getGroupsCount() == 0) {
+                FragmentEmptyGroup fragmentEmptyGroup = FragmentEmptyGroup.newInstance();
+                getSupportFragmentManager().beginTransaction().add(R.id.container_home, fragmentEmptyGroup).commit();
+            } else {
+
+            }
         }
+
+//        Log.i(TAG, "Contact count: " + mDatabase.getContactsCount());
+//        if (mDatabase.getContactsCount() > 0) {
+//            mIsInAddGroupPage = true;
+//
+//            mFragmentAddGroup = FragmentAddGroup.newInstance();
+//
+//            getSupportFragmentManager().beginTransaction().add(R.id.container_home, mFragmentAddGroup).commit();
+//        } else {
+//
+//        }
     }
 
     @Override
