@@ -112,6 +112,8 @@ public class KontaksDatabaseHelper extends SQLiteOpenHelper {
             do {
                 Contact contact = new Contact();
                 contact.setDisplayName(cursor.getString(cursor.getColumnIndex(COL_FULLNAME)));
+                contact.setGivenName(cursor.getString(cursor.getColumnIndex(COL_GIVEN_NAME)));
+                contact.setFamilyName(cursor.getString(cursor.getColumnIndex(COL_FAMILY_NAME)));
 
                 listContacts.add(contact);
             } while (cursor.moveToNext());

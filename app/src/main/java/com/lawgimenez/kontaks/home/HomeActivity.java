@@ -212,8 +212,10 @@ public class HomeActivity extends AppCompatActivity {
             Log.i(TAG, "Done retrieving contacts list");
             mIsInAddGroupPage = true;
 
-            mMenuItem.setTitle(getString(R.string.next));
-
+            if (mMenuItem != null) {
+                mMenuItem.setTitle(getString(R.string.next));
+            }
+            
             mFragmentAddGroup = FragmentAddGroup.newInstance();
             getSupportFragmentManager().beginTransaction()
                     .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_right)

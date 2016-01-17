@@ -13,4 +13,14 @@
         android:layout_height="60dp"
         />
 
+    <TextView
+        android:id="@+id/textview_contact_display"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/imageview_contact"
+        android:layout_alignBottom="@+id/imageview_contact"
+        android:layout_alignTop="@+id/imageview_contact"
+        android:textColor="@android:color/white"
+        />
+
 </RelativeLayout>

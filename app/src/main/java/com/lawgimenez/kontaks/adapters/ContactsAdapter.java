@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.afollestad.dragselectrecyclerview.DragSelectRecyclerViewAdapter;
 import com.amulyakhare.textdrawable.TextDrawable;
@@ -47,6 +48,8 @@ public class ContactsAdapter extends DragSelectRecyclerViewAdapter<ContactsAdapt
         TextDrawable textDrawable = TextDrawable.builder().buildRound(firstLetter, randomColor);
 
         contactsViewHolder.mImageViewContact.setImageDrawable(textDrawable);
+
+        contactsViewHolder.mTextViewContactName.setText(contact.getGivenName());
     }
 
     @Override
@@ -58,12 +61,14 @@ public class ContactsAdapter extends DragSelectRecyclerViewAdapter<ContactsAdapt
             View.OnLongClickListener {
 
         public ImageView mImageViewContact;
+        public TextView mTextViewContactName;
 
         public ContactsViewHolder(View view) {
             super(view);
 
             mImageViewContact = (ImageView) view.findViewById(R.id.imageview_contact);
-            mImageViewContact.setOnClickListener(this);
+            mTextViewContactName = (TextView) view.findViewById(R.id.textview_contact_display);
+            view.setOnClickListener(this);
         }
 
         @Override
