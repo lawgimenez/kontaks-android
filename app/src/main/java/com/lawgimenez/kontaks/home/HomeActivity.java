@@ -96,11 +96,14 @@ public class HomeActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
+        mMenuItem = menu.findItem(R.id.action_save);
         if (mContactsEmpty || mGroupEmpty) {
-            return false;
+            mMenuItem.setVisible(false);
         } else {
-            return true;
+            mMenuItem.setVisible(true);
         }
+
+        return true;
     }
 
     @Override
@@ -109,8 +112,6 @@ public class HomeActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        mMenuItem = item;
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_save) {
