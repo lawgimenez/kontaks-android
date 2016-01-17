@@ -56,12 +56,14 @@ public class FragmentSelectContacts extends Fragment implements DragSelectRecycl
 
     @Override
     public void onDragSelectionChanged(int count) {
-        Log.i(TAG, "Selected = " + count);
+        Log.i(TAG, "Selected count = " + count);
     }
 
     @Override
     public void onContactsSelected(int index) {
-        Log.i(TAG, "Contact selected at index = " + index);
+//        Log.i(TAG, "Contact selected at index = " + index);
+
+        Log.i(TAG, "Selected: " + mAdapter.getSelectedIndices().toString());
 
         mAdapter.toggleSelected(index);
     }
