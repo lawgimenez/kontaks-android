@@ -68,11 +68,11 @@ public class HomeActivity extends AppCompatActivity {
             retrieveContactsTask.execute();
 
             FragmentContactsSync fragmentContactsSync = FragmentContactsSync.newInstance();
-            getSupportFragmentManager().beginTransaction().add(R.id.container_home, fragmentContactsSync).commit();
+            getSupportFragmentManager().beginTransaction().addToBackStack(null).add(R.id.container_home, fragmentContactsSync).commit();
         } else {
             if (mDatabase.getGroupsCount() == 0) {
                 FragmentEmptyGroup fragmentEmptyGroup = FragmentEmptyGroup.newInstance();
-                getSupportFragmentManager().beginTransaction().add(R.id.container_home, fragmentEmptyGroup).commit();
+                getSupportFragmentManager().beginTransaction().addToBackStack(null).add(R.id.container_home, fragmentEmptyGroup).commit();
 
                 mGroupEmpty = true;
             } else {
@@ -147,7 +147,16 @@ public class HomeActivity extends AppCompatActivity {
 
             return true;
         } else if (id == R.id.action_cancel) {
+            Log.i(TAG, "Action cancel = " + mIsInAddGroupPage);
 
+            if (mIsInAddGroupPage) {
+                if (mDatabase.getGroupsCount() == 0) {
+                    Log.i(TAG, "Pop stack");
+                    getSupportFragmentManager().popBackStack();
+                } else {
+                    Log.i(TAG, "Whut");
+                }
+            }
         }
 
         return super.onOptionsItemSelected(item);
@@ -234,6 +243,7 @@ public class HomeActivity extends AppCompatActivity {
         mFragmentAddGroup = FragmentAddGroup.newInstance();
         getSupportFragmentManager().beginTransaction()
                 .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_right)
+                .addToBackStack(null)
                 .replace(R.id.container_home, mFragmentAddGroup).commit();
 
         mToolbar.setTitle(getString(R.string.add_group));
