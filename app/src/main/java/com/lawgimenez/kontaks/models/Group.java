@@ -5,11 +5,17 @@ package com.lawgimenez.kontaks.models;
  */
 public class Group {
 
+    private long mId;
+
     private long mGroupId;
 
     private String mGroupName;
 
     private String mGroupDescription;
+
+    public void setId(int id) {
+        mId = id;
+    }
 
     public void setGroupId(long groupId) {
         mGroupId = groupId;
@@ -21,6 +27,10 @@ public class Group {
 
     public void setGroupDescription(String groupDescription) {
         mGroupDescription = groupDescription;
+    }
+
+    public long getId() {
+        return mId;
     }
 
     public long getGroupId() {

@@ -38,6 +38,7 @@ public class KontaksDatabaseHelper extends SQLiteOpenHelper {
     private static final String COL_FAVORITED = "favorited";
 
     // Column names for groups
+    private static final String COL_GROUP_ID = "group_id";
     private static final String COL_GROUP_NAME = "group_name";
     private static final String COL_GROUP_DESC = "group_desc";
     private static final String COL_GROUP_FOREIGN_KEY = "group_contacts_id";
@@ -59,6 +60,7 @@ public class KontaksDatabaseHelper extends SQLiteOpenHelper {
     // SQL statement for creating groups table
     private static final String CREATE_GROUPS_TABLE = "CREATE TABLE " + TABLE_GROUPS + "("
             + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + COL_GROUP_ID + " INTEGER, "
             + COL_GROUP_FOREIGN_KEY + " INTEGER, "
             + COL_GROUP_NAME + " TEXT, "
             + COL_GROUP_DESC + " TEXT)";
@@ -128,11 +130,33 @@ public class KontaksDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues cv = new ContentValues();
+        cv.put(COL_GROUP_ID, group.getGroupId());
         cv.put(COL_GROUP_NAME, group.getGroupName());
         cv.put(COL_GROUP_DESC, group.getGroupDescription());
 
         db.insert(TABLE_GROUPS, null, cv);
         db.close();
+    }
+
+    public ArrayList<Group> getAllGroups() {
+        ArrayList<Group> listGroups = new ArrayList<>();
+
+        String sqlSelecAll = "SELECT * FROM " + TABLE_GROUPS;
+
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(sqlSelecAll, null);
+        if (cursor.moveToFirst()) {
+            do {
+                Group group = new Group();
+                group.setGroupId(cursor.getLong(cursor.getColumnIndex(COL_GROUP_ID)));
+                group.setGroupName(cursor.getString(cursor.getColumnIndex(COL_GROUP_NAME)));
+                group.setGroupDescription(cursor.getString(cursor.getColumnIndex(COL_GROUP_DESC)));
+
+                listGroups.add(group);
+            } while (cursor.moveToNext());
+        }
+
+        return listGroups;
     }
 
     public int getContactsCount() {
