@@ -43,6 +43,7 @@ public class HomeActivity extends AppCompatActivity {
     private boolean mGroupEmpty = false;
 
     private MenuItem mMenuItemSave;
+    private MenuItem mMenuItemCancel;
 
     private String mGroupName;
     private String mGroupDesc;
@@ -97,10 +98,14 @@ public class HomeActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
         mMenuItemSave = menu.findItem(R.id.action_save);
+        mMenuItemCancel = menu.findItem(R.id.action_cancel);
+
         if (mContactsEmpty || mGroupEmpty) {
             mMenuItemSave.setVisible(false);
+            mMenuItemCancel.setVisible(false);
         } else {
             mMenuItemSave.setVisible(true);
+            mMenuItemCancel.setVisible(true);
         }
 
         return true;
@@ -141,6 +146,8 @@ public class HomeActivity extends AppCompatActivity {
             }
 
             return true;
+        } else if (id == R.id.action_cancel) {
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -231,6 +238,7 @@ public class HomeActivity extends AppCompatActivity {
 
         mToolbar.setTitle(getString(R.string.add_group));
 
+        mMenuItemCancel.setVisible(true);
         mMenuItemSave.setVisible(true);
         mMenuItemSave.setTitle(getString(R.string.next));
     }
