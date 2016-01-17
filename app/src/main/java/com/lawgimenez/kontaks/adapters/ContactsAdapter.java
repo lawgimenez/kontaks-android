@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.afollestad.dragselectrecyclerview.DragSelectRecyclerViewAdapter;
 import com.lawgimenez.kontaks.R;
+import com.lawgimenez.kontaks.listeners.OnContactsSelectedListener;
 import com.lawgimenez.kontaks.models.Contact;
 
 import java.util.ArrayList;
@@ -19,7 +20,10 @@ public class ContactsAdapter extends DragSelectRecyclerViewAdapter<ContactsAdapt
 
     private ArrayList<Contact> mListContacts;
 
-    public ContactsAdapter(ArrayList<Contact> listContacts) {
+    private OnContactsSelectedListener mContactsListener;
+
+    public ContactsAdapter(OnContactsSelectedListener contactsListener, ArrayList<Contact> listContacts) {
+        mContactsListener = contactsListener;
         mListContacts = listContacts;
     }
 
@@ -43,7 +47,7 @@ public class ContactsAdapter extends DragSelectRecyclerViewAdapter<ContactsAdapt
         return mListContacts.size();
     }
 
-    public class ContactsViewHolder extends RecyclerView.ViewHolder {
+    public class ContactsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView mTextViewContact;
 
@@ -51,6 +55,12 @@ public class ContactsAdapter extends DragSelectRecyclerViewAdapter<ContactsAdapt
             super(view);
 
             mTextViewContact = (TextView) view.findViewById(R.id.textview_contact);
+            mTextViewContact.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            mContactsListener.onContactsSelected(getAdapterPosition());
         }
     }
 }

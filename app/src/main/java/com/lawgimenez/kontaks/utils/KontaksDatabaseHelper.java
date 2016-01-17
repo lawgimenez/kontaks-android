@@ -9,6 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.lawgimenez.kontaks.models.Contact;
 import com.lawgimenez.kontaks.models.Group;
 
+import java.util.ArrayList;
+
 /**
  * Created by lawrencegimenez on 1/10/16.
  */
@@ -91,6 +93,25 @@ public class KontaksDatabaseHelper extends SQLiteOpenHelper {
 
         db.insert(TABLE_CONTACTS, null, cv);
         db.close();
+    }
+
+    public ArrayList<Contact> getAllContacts() {
+        ArrayList<Contact> listContacts = new ArrayList<>();
+
+        String sqlSelectAll = "SELECT * FROM " + TABLE_CONTACTS;
+
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(sqlSelectAll, null);
+        if (cursor.moveToFirst()) {
+            do {
+                Contact contact = new Contact();
+                contact.setDisplayName(cursor.getString(cursor.getColumnIndex(COL_FULLNAME)));
+
+                listContacts.add(contact);
+            } while (cursor.moveToNext());
+        }
+
+        return listContacts;
     }
 
     public void addGroup(Group group) {

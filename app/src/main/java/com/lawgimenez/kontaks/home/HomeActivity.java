@@ -51,6 +51,8 @@ public class HomeActivity extends AppCompatActivity {
         Log.i(TAG, "Contact count: " + mDatabase.getContactsCount());
         if(mDatabase.getContactsCount() > 0) {
             mFragmentAddGroup = FragmentAddGroup.newInstance();
+            mFragmentAddGroup.setContactsList(mDatabase.getAllContacts());
+
             getSupportFragmentManager().beginTransaction().add(R.id.container_home, mFragmentAddGroup).commit();
         } else {
             RetrieveContactsTask retrieveContactsTask = new RetrieveContactsTask();

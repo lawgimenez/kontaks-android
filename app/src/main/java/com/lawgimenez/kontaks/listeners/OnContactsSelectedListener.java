@@ -5,5 +5,5 @@ package com.lawgimenez.kontaks.listeners;
  */
 public interface OnContactsSelectedListener {
 
-    void onContactsSelected();
+    void onContactsSelected(int index);
 }
