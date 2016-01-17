@@ -132,6 +132,7 @@ public class HomeActivity extends AppCompatActivity {
                 mFragmentSelectContacts.setContactsList(mDatabase.getAllContacts());
                 getSupportFragmentManager()
                         .beginTransaction()
+                        .addToBackStack(null)
                         .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_right)
                         .replace(R.id.container_home, mFragmentSelectContacts).commit();
             } else {
