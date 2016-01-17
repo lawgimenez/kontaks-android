@@ -230,6 +230,7 @@ public class HomeActivity extends AppCompatActivity {
         mToolbar.setTitle(getString(R.string.add_group));
 
         mMenuItemSave.setVisible(true);
+        mMenuItemSave.setTitle(getString(R.string.next));
     }
 
     private class RetrieveContactsTask extends AsyncTask<Void, Void, Integer> {
