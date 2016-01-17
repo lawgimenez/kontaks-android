@@ -39,6 +39,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private boolean mIsInAddGroupPage = false;
 
+    private boolean mContactsEmpty = false;
     private boolean mGroupEmpty = false;
 
     private MenuItem mMenuItem;
@@ -60,6 +61,8 @@ public class HomeActivity extends AppCompatActivity {
 
         Log.i(TAG, "Group count: " + mDatabase.getGroupsCount());
         if (mDatabase.getContactsCount() == 0) {
+            mContactsEmpty = true;
+
             RetrieveContactsTask retrieveContactsTask = new RetrieveContactsTask();
             retrieveContactsTask.execute();
 
@@ -93,7 +96,7 @@ public class HomeActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
-        if (mGroupEmpty) {
+        if (mContactsEmpty || mGroupEmpty) {
             return false;
         } else {
             return true;
