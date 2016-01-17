@@ -114,6 +114,9 @@ public class HomeActivity extends AppCompatActivity {
                     long photoThumbnail = cursor.getLong(cursor.getColumnIndex(ContactsContract.Contacts.PHOTO_THUMBNAIL_URI));
                     int isFavorited = cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts.STARRED));
 
+                    String givenName = "";
+                    String familyName = "";
+
                     // Fetch given and family name
                     String whereName = ContactsContract.Data.MIMETYPE + " = ? AND " +
                             ContactsContract.CommonDataKinds.StructuredName.CONTACT_ID + " = " + contactId;
@@ -124,8 +127,8 @@ public class HomeActivity extends AppCompatActivity {
                             whereName, whereNameParams, ContactsContract.CommonDataKinds.StructuredName.GIVEN_NAME);
                     if (cursorName != null) {
                         while (cursorName.moveToNext()) {
-                            String givenName = cursorName.getString(cursorName.getColumnIndex(ContactsContract.CommonDataKinds.StructuredName.GIVEN_NAME));
-                            String familyName = cursorName.getString(cursorName.getColumnIndex(ContactsContract.CommonDataKinds.StructuredName.FAMILY_NAME));
+                            givenName = cursorName.getString(cursorName.getColumnIndex(ContactsContract.CommonDataKinds.StructuredName.GIVEN_NAME));
+                            familyName = cursorName.getString(cursorName.getColumnIndex(ContactsContract.CommonDataKinds.StructuredName.FAMILY_NAME));
 
                             Log.i(TAG, "First name = " + givenName);
                             Log.i(TAG, "Last name = " + familyName);
@@ -153,6 +156,8 @@ public class HomeActivity extends AppCompatActivity {
                     Contact contacts = new Contact();
                     contacts.setDeviceId(Long.parseLong(contactId));
                     contacts.setDisplayName(name);
+                    contacts.setGivenName(givenName);
+                    contacts.setFamilyName(familyName);
                     contacts.setPhotoId(photoId);
                     contacts.setPhotoThumbnailUri(photoThumbnail);
                     contacts.setIsFavorited(isFavorited);
@@ -182,6 +187,7 @@ public class HomeActivity extends AppCompatActivity {
             Log.i(TAG, "Done retrieving contacts list");
 
             mFragmentAddGroup = FragmentAddGroup.newInstance();
+            mFragmentAddGroup.setContactsList(mDatabase.getAllContacts());
             getSupportFragmentManager().beginTransaction()
                     .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_right)
                     .replace(R.id.container_home, mFragmentAddGroup).commit();
