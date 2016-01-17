@@ -39,6 +39,8 @@ public class HomeActivity extends AppCompatActivity {
 
     private boolean mIsInAddGroupPage = false;
 
+    private boolean mGroupEmpty = false;
+
     private MenuItem mMenuItem;
 
     private String mGroupName;
@@ -67,6 +69,8 @@ public class HomeActivity extends AppCompatActivity {
             if (mDatabase.getGroupsCount() == 0) {
                 FragmentEmptyGroup fragmentEmptyGroup = FragmentEmptyGroup.newInstance();
                 getSupportFragmentManager().beginTransaction().add(R.id.container_home, fragmentEmptyGroup).commit();
+
+                mGroupEmpty = true;
             } else {
 
             }
@@ -88,7 +92,12 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+
+        if (mGroupEmpty) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     @Override
