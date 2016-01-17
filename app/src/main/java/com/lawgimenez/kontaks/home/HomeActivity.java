@@ -15,6 +15,7 @@ import android.widget.FrameLayout;
 import com.lawgimenez.kontaks.KontaksApplication;
 import com.lawgimenez.kontaks.R;
 import com.lawgimenez.kontaks.models.Contact;
+import com.lawgimenez.kontaks.models.Group;
 import com.lawgimenez.kontaks.pages.FragmentAddGroup;
 import com.lawgimenez.kontaks.pages.FragmentContactsSync;
 import com.lawgimenez.kontaks.utils.KontaksDatabaseHelper;
@@ -31,6 +32,8 @@ public class HomeActivity extends AppCompatActivity {
     private KontaksApplication mApplication;
     private KontaksDatabaseHelper mDatabase;
 
+    private FragmentAddGroup mFragmentAddGroup;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,10 +46,12 @@ public class HomeActivity extends AppCompatActivity {
 
         setSupportActionBar(mToolbar);
 
+        Log.i(TAG, "Group count: " + mDatabase.getGroupsCount());
+
         Log.i(TAG, "Contact count: " + mDatabase.getContactsCount());
         if(mDatabase.getContactsCount() > 0) {
-            FragmentAddGroup fragmentAddGroup = FragmentAddGroup.newInstance();
-            getSupportFragmentManager().beginTransaction().add(R.id.container_home, fragmentAddGroup).commit();
+            mFragmentAddGroup = FragmentAddGroup.newInstance();
+            getSupportFragmentManager().beginTransaction().add(R.id.container_home, mFragmentAddGroup).commit();
         } else {
             RetrieveContactsTask retrieveContactsTask = new RetrieveContactsTask();
             retrieveContactsTask.execute();
@@ -73,7 +78,17 @@ public class HomeActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_save) {
             Log.i(TAG, "Save Group");
-            
+
+            if (mFragmentAddGroup != null) {
+                Group group = new Group();
+                group.setGroupName(mFragmentAddGroup.getGroupName());
+                group.setGroupDescription(mFragmentAddGroup.getGroupDescription());
+
+                mDatabase.addGroup(group);
+            } else {
+                Log.i(TAG, "Add Group page is not currently displayed.");
+            }
+
             return true;
         }
 
@@ -136,10 +151,10 @@ public class HomeActivity extends AppCompatActivity {
         protected void onPostExecute(Integer result) {
             Log.i(TAG, "Done retrieving contacts list");
 
-            FragmentAddGroup fragmentAddGroup = FragmentAddGroup.newInstance();
+            mFragmentAddGroup = FragmentAddGroup.newInstance();
             getSupportFragmentManager().beginTransaction()
                     .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_right)
-                    .replace(R.id.container_home, fragmentAddGroup).commit();
+                    .replace(R.id.container_home, mFragmentAddGroup).commit();
 
             mToolbar.setTitle(getString(R.string.add_group));
         }

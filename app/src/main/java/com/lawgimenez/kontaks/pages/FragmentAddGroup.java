@@ -36,4 +36,12 @@ public class FragmentAddGroup extends Fragment {
         mEditTextAddGroup = (EditText) view.findViewById(R.id.edittext_add_group);
         mEditTextAddGroupDesc = (EditText) view.findViewById(R.id.edittext_add_desc);
     }
+
+    public String getGroupName() {
+        return mEditTextAddGroup.getText().toString();
+    }
+
+    public String getGroupDescription() {
+        return mEditTextAddGroupDesc.getText().toString();
+    }
 }
