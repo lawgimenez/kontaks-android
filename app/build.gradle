@@ -30,4 +30,5 @@ dependencies {
     compile('com.github.afollestad:drag-select-recyclerview:0.3.1@aar') {
         transitive = true
     }
+    compile 'de.hdodenhof:circleimageview:2.0.0'
 }
