@@ -42,7 +42,7 @@ public class HomeActivity extends AppCompatActivity {
     private boolean mContactsEmpty = false;
     private boolean mGroupEmpty = false;
 
-    private MenuItem mMenuItem;
+    private MenuItem mMenuItemSave;
 
     private String mGroupName;
     private String mGroupDesc;
@@ -96,11 +96,11 @@ public class HomeActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
-        mMenuItem = menu.findItem(R.id.action_save);
+        mMenuItemSave = menu.findItem(R.id.action_save);
         if (mContactsEmpty || mGroupEmpty) {
-            mMenuItem.setVisible(false);
+            mMenuItemSave.setVisible(false);
         } else {
-            mMenuItem.setVisible(true);
+            mMenuItemSave.setVisible(true);
         }
 
         return true;
@@ -228,6 +228,8 @@ public class HomeActivity extends AppCompatActivity {
                 .replace(R.id.container_home, mFragmentAddGroup).commit();
 
         mToolbar.setTitle(getString(R.string.add_group));
+
+        mMenuItemSave.setVisible(true);
     }
 
     private class RetrieveContactsTask extends AsyncTask<Void, Void, Integer> {
@@ -244,10 +246,6 @@ public class HomeActivity extends AppCompatActivity {
         protected void onPostExecute(Integer result) {
             Log.i(TAG, "Done retrieving contacts list");
             mIsInAddGroupPage = true;
-
-            if (mMenuItem != null) {
-                mMenuItem.setTitle(getString(R.string.next));
-            }
 
             createGroup();
         }
