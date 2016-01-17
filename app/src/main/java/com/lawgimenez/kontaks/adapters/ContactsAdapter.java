@@ -85,6 +85,7 @@ public class ContactsAdapter extends DragSelectRecyclerViewAdapter<ContactsAdapt
             mImageViewContact = (ImageView) view.findViewById(R.id.imageview_contact);
             mTextViewContactName = (TextView) view.findViewById(R.id.textview_contact_display);
             view.setOnClickListener(this);
+            view.setOnLongClickListener(this);
         }
 
         @Override
