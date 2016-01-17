@@ -4,9 +4,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ImageView;
 
 import com.afollestad.dragselectrecyclerview.DragSelectRecyclerViewAdapter;
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.lawgimenez.kontaks.R;
 import com.lawgimenez.kontaks.listeners.OnContactsSelectedListener;
 import com.lawgimenez.kontaks.models.Contact;
@@ -39,7 +41,12 @@ public class ContactsAdapter extends DragSelectRecyclerViewAdapter<ContactsAdapt
 
         Contact contact = mListContacts.get(position);
 
-        contactsViewHolder.mTextViewContact.setText(contact.getDisplayName());
+        ColorGenerator colorGenerator = ColorGenerator.MATERIAL;
+        int randomColor = colorGenerator.getRandomColor();
+        String firstLetter = contact.getDisplayName().substring(0, 1);
+        TextDrawable textDrawable = TextDrawable.builder().buildRound(firstLetter, randomColor);
+
+        contactsViewHolder.mImageViewContact.setImageDrawable(textDrawable);
     }
 
     @Override
@@ -50,13 +57,13 @@ public class ContactsAdapter extends DragSelectRecyclerViewAdapter<ContactsAdapt
     public class ContactsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
             View.OnLongClickListener {
 
-        public TextView mTextViewContact;
+        public ImageView mImageViewContact;
 
         public ContactsViewHolder(View view) {
             super(view);
 
-            mTextViewContact = (TextView) view.findViewById(R.id.textview_contact);
-            mTextViewContact.setOnClickListener(this);
+            mImageViewContact = (ImageView) view.findViewById(R.id.imageview_contact);
+            mImageViewContact.setOnClickListener(this);
         }
 
         @Override
