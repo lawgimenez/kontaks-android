@@ -37,4 +37,12 @@
         style="@style/BaseEditTextTheme"
         />
 
+    <com.afollestad.dragselectrecyclerview.DragSelectRecyclerView
+        android:id="@+id/recycler_contacts"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/edittext_add_desc"
+        android:scrollbars="vertical"
+        />
+
 </RelativeLayout>
