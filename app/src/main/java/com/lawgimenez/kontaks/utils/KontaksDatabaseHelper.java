@@ -156,6 +156,8 @@ public class KontaksDatabaseHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
 
+        cursor.close();
+
         return listGroups;
     }
 
