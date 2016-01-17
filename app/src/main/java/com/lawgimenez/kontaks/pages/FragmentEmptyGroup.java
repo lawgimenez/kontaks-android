@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.lawgimenez.kontaks.R;
+import com.lawgimenez.kontaks.home.HomeActivity;
 
 /**
  * Created by lawrencegimenez on 1/17/16.
@@ -34,6 +35,7 @@ public class FragmentEmptyGroup extends Fragment implements View.OnClickListener
 
     @Override
     public void onClick(View view) {
-
+        HomeActivity homeActivity = (HomeActivity) getActivity();
+        homeActivity.createGroup();
     }
 }

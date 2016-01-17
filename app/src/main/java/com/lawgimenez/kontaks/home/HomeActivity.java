@@ -208,6 +208,15 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
+    public void createGroup() {
+        mFragmentAddGroup = FragmentAddGroup.newInstance();
+        getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_right)
+                .replace(R.id.container_home, mFragmentAddGroup).commit();
+
+        mToolbar.setTitle(getString(R.string.add_group));
+    }
+
     private class RetrieveContactsTask extends AsyncTask<Void, Void, Integer> {
 
         @Override
@@ -227,12 +236,7 @@ public class HomeActivity extends AppCompatActivity {
                 mMenuItem.setTitle(getString(R.string.next));
             }
 
-            mFragmentAddGroup = FragmentAddGroup.newInstance();
-            getSupportFragmentManager().beginTransaction()
-                    .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_right)
-                    .replace(R.id.container_home, mFragmentAddGroup).commit();
-
-            mToolbar.setTitle(getString(R.string.add_group));
+            createGroup();
         }
     }
 }
