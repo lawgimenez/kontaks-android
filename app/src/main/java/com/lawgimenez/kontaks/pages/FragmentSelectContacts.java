@@ -2,7 +2,7 @@ package com.lawgimenez.kontaks.pages;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,7 +41,8 @@ public class FragmentSelectContacts extends Fragment implements DragSelectRecycl
 
         // Initialize data
         mRecyclerViewList = (DragSelectRecyclerView) view.findViewById(R.id.recycler_contacts);
-        mRecyclerViewList.setLayoutManager(new GridLayoutManager(getActivity(), 4));
+        mRecyclerViewList.setLayoutManager(new LinearLayoutManager(getActivity()));
+//        mRecyclerViewList.setLayoutManager(new GridLayoutManager(getActivity(), 4));
 
         mAdapter = new ContactsAdapter(this, mListContacts);
         mAdapter.setSelectionListener(this);
