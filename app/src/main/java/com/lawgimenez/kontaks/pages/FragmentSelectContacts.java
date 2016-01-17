@@ -47,7 +47,8 @@ public class FragmentSelectContacts extends Fragment implements DragSelectRecycl
         mRecyclerViewList.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).color(Color.GRAY).build());
 //        mRecyclerViewList.setLayoutManager(new GridLayoutManager(getActivity(), 4));
 
-        mAdapter = new ContactsAdapter(this, mListContacts);
+        mAdapter = new ContactsAdapter(getActivity(), mListContacts);
+        mAdapter.setContactsSelectedListener(this);
         mAdapter.setSelectionListener(this);
         mRecyclerViewList.setAdapter(mAdapter);
 

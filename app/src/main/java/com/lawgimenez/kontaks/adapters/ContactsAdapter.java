@@ -1,5 +1,7 @@
 package com.lawgimenez.kontaks.adapters;
 
+import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,9 +27,15 @@ public class ContactsAdapter extends DragSelectRecyclerViewAdapter<ContactsAdapt
 
     private OnContactsSelectedListener mContactsListener;
 
-    public ContactsAdapter(OnContactsSelectedListener contactsListener, ArrayList<Contact> listContacts) {
-        mContactsListener = contactsListener;
+    private Context mContext;
+
+    public ContactsAdapter(Context context, ArrayList<Contact> listContacts) {
+        mContext = context;
         mListContacts = listContacts;
+    }
+
+    public void setContactsSelectedListener(OnContactsSelectedListener listener) {
+        mContactsListener = listener;
     }
 
     @Override
@@ -41,6 +49,12 @@ public class ContactsAdapter extends DragSelectRecyclerViewAdapter<ContactsAdapt
         super.onBindViewHolder(contactsViewHolder, position);
 
         Contact contact = mListContacts.get(position);
+
+        if (isIndexSelected(position)) {
+            contactsViewHolder.mViewContainer.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorAccent));
+        } else {
+            contactsViewHolder.mViewContainer.setBackgroundColor(ContextCompat.getColor(mContext, android.R.color.white));
+        }
 
         ColorGenerator colorGenerator = ColorGenerator.MATERIAL;
         int randomColor = colorGenerator.getRandomColor();
@@ -60,12 +74,14 @@ public class ContactsAdapter extends DragSelectRecyclerViewAdapter<ContactsAdapt
     public class ContactsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
             View.OnLongClickListener {
 
+        public View mViewContainer;
         public ImageView mImageViewContact;
         public TextView mTextViewContactName;
 
         public ContactsViewHolder(View view) {
             super(view);
 
+            mViewContainer = view;
             mImageViewContact = (ImageView) view.findViewById(R.id.imageview_contact);
             mTextViewContactName = (TextView) view.findViewById(R.id.textview_contact_display);
             view.setOnClickListener(this);
