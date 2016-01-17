@@ -108,29 +108,50 @@ public class HomeActivity extends AppCompatActivity {
         if (cursor != null) {
             if (cursor.getCount() > 0) {
                 while (cursor.moveToNext()) {
-                    String id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
+                    String contactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
                     String name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
                     long photoId = cursor.getLong(cursor.getColumnIndex(ContactsContract.Contacts.PHOTO_ID));
                     long photoThumbnail = cursor.getLong(cursor.getColumnIndex(ContactsContract.Contacts.PHOTO_THUMBNAIL_URI));
                     int isFavorited = cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts.STARRED));
 
+                    // Fetch given and family name
+                    String whereName = ContactsContract.Data.MIMETYPE + " = ? AND " +
+                            ContactsContract.CommonDataKinds.StructuredName.CONTACT_ID + " = " + contactId;
+                    String[] whereNameParams = new String[] {
+                            ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE
+                    };
+                    Cursor cursorName = getContentResolver().query(ContactsContract.Data.CONTENT_URI, null,
+                            whereName, whereNameParams, ContactsContract.CommonDataKinds.StructuredName.GIVEN_NAME);
+                    if (cursorName != null) {
+                        while (cursorName.moveToNext()) {
+                            String givenName = cursorName.getString(cursorName.getColumnIndex(ContactsContract.CommonDataKinds.StructuredName.GIVEN_NAME));
+                            String familyName = cursorName.getString(cursorName.getColumnIndex(ContactsContract.CommonDataKinds.StructuredName.FAMILY_NAME));
+
+                            Log.i(TAG, "First name = " + givenName);
+                            Log.i(TAG, "Last name = " + familyName);
+                        }
+
+                        cursorName.close();
+                    }
+
                     // Retrieve contact's phone numbers if there is one
                     String hasPhoneNum = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
                     if (Integer.parseInt(hasPhoneNum) > 0) {
                         // Cursor for getting phone number
-                        Cursor cursorPhoneNum = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
-                                new String[] { id }, null);
+                        Cursor cursorPhoneNum = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                                null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
+                                new String[] { contactId }, null);
                         if (cursorPhoneNum != null) {
                             while (cursorPhoneNum.moveToNext()) {
                                 String phoneNumber = cursorPhoneNum.getString(cursorPhoneNum.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                                Log.i(TAG, "Phone No: " + phoneNumber);
+                                //Log.i(TAG, "Phone No: " + phoneNumber);
                             }
                             cursorPhoneNum.close();
                         }
                     }
 
                     Contact contacts = new Contact();
-                    contacts.setDeviceId(Long.parseLong(id));
+                    contacts.setDeviceId(Long.parseLong(contactId));
                     contacts.setDisplayName(name);
                     contacts.setPhotoId(photoId);
                     contacts.setPhotoThumbnailUri(photoThumbnail);
@@ -138,7 +159,7 @@ public class HomeActivity extends AppCompatActivity {
 
                     mDatabase.addContacts(contacts);
 
-                    Log.i(TAG, "Name: " + name);
+                    //Log.i(TAG, "Name: " + name);
 
                 } // end of while loop
             }

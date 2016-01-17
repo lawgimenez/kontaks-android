@@ -15,6 +15,10 @@ public class Contact {
 
     private String mDisplayName;
 
+    private String mGivenName;
+
+    private String mFamilyName;
+
     private int mHasPhoneNumber;
 
     private ArrayList<String> mListPhoneNumbers;
@@ -39,6 +43,14 @@ public class Contact {
 
     public void setDisplayName(String displayName) {
         mDisplayName = displayName;
+    }
+
+    public void setGivenName(String givenName) {
+        mGivenName = givenName;
+    }
+
+    public void setFamilyName(String familyName) {
+        mFamilyName = familyName;
     }
 
     public void setHasPhoneNumber(int hasPhoneNumber) {
@@ -87,6 +99,14 @@ public class Contact {
 
     public String getDisplayName() {
         return mDisplayName;
+    }
+
+    public String getGivenName() {
+        return mGivenName;
+    }
+
+    public String getFamilyName() {
+        return mFamilyName;
     }
 
     public int getHasPhoneNumber() {

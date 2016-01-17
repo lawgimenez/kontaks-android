@@ -27,6 +27,8 @@ public class KontaksDatabaseHelper extends SQLiteOpenHelper {
     // Column names for contacts
     private static final String COL_ID = "id";
     private static final String COL_FULLNAME = "fullname";
+    private static final String COL_GIVEN_NAME = "given_name";
+    private static final String COL_FAMILY_NAME = "family_name";
     private static final String COL_HAS_PHONE_NUMBER = "has_phone_number";
     private static final String COL_PHOTO_ID = "photo_id";
     private static final String COL_PHOTO_URI = "photo_uri";
@@ -44,6 +46,8 @@ public class KontaksDatabaseHelper extends SQLiteOpenHelper {
     private static final String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_CONTACTS + "("
             + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COL_FULLNAME + " TEXT, "
+            + COL_GIVEN_NAME + " TEXT, "
+            + COL_FAMILY_NAME + " TEXT, "
             + COL_HAS_PHONE_NUMBER + " INTEGER, "
             + COL_PHOTO_ID + " TEXT, "
             + COL_PHOTO_URI + " TEXT, "
@@ -83,6 +87,8 @@ public class KontaksDatabaseHelper extends SQLiteOpenHelper {
 
         ContentValues cv = new ContentValues();
         cv.put(COL_FULLNAME, contacts.getDisplayName());
+        cv.put(COL_GIVEN_NAME, contacts.getGivenName());
+        cv.put(COL_FAMILY_NAME, contacts.getFamilyName());
         cv.put(COL_HAS_PHONE_NUMBER, contacts.getHasPhoneNumber());
         cv.put(COL_PHOTO_ID, contacts.getPhotoId());
         cv.put(COL_PHOTO_URI, contacts.getPhotoUri());
