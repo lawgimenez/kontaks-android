@@ -47,7 +47,8 @@ public class ContactsAdapter extends DragSelectRecyclerViewAdapter<ContactsAdapt
         return mListContacts.size();
     }
 
-    public class ContactsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ContactsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
+            View.OnLongClickListener {
 
         public TextView mTextViewContact;
 
@@ -61,6 +62,13 @@ public class ContactsAdapter extends DragSelectRecyclerViewAdapter<ContactsAdapt
         @Override
         public void onClick(View view) {
             mContactsListener.onContactsSelected(getAdapterPosition());
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            mContactsListener.onContactsSelectedLongPress(getAdapterPosition());
+
+            return true;
         }
     }
 }

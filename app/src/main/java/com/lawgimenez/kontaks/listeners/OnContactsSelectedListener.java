@@ -6,4 +6,6 @@ package com.lawgimenez.kontaks.listeners;
 public interface OnContactsSelectedListener {
 
     void onContactsSelected(int index);
+
+    void onContactsSelectedLongPress(int index);
 }

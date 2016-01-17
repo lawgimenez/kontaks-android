@@ -65,6 +65,11 @@ public class FragmentAddGroup extends Fragment implements DragSelectRecyclerView
         mAdapter.toggleSelected(index);
     }
 
+    @Override
+    public void onContactsSelectedLongPress(int index) {
+        mRecyclerViewList.setDragSelectActive(true, index);
+    }
+
     private void initViews(View view) {
         mEditTextAddGroup = (EditText) view.findViewById(R.id.edittext_add_group);
         mEditTextAddGroupDesc = (EditText) view.findViewById(R.id.edittext_add_desc);
